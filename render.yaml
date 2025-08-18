@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: ai-multi-tool-chatbot
+    env: docker
+    plan: free
+    autoDeploy: true
+    dockerContext: .
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: GOOGLE_API_KEY
+        sync: false   # Add manually in Render dashboard
