@@ -26,7 +26,7 @@ if "page" not in st.session_state:
 
 # Navigation Buttons
 def home():
-    st.title("🤖 Welcome to My AI Multi-Tool Chatbot App")
+    st.title(" Welcome to My AI Multi-Tool Chatbot App")
     st.write("Choose a feature:")
 
     col1, col2, col3 = st.columns(3)
@@ -49,8 +49,8 @@ def home():
 def youtube_page():
     st.header("📺 YouTube Video Q&A Bot")
 
-    youtube_url = st.text_input("🔗 Enter full YouTube link:")
-    question = st.text_input("❓ Your Question about the video:")
+    youtube_url = st.text_input(" Enter full YouTube link:")
+    question = st.text_input(" Your Question about the video:")
 
     def extract_video_id(url):
         try:
@@ -81,7 +81,7 @@ def youtube_page():
                 qa = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
                 with st.spinner("Thinking..."):
                     result = qa.invoke({"query": question})
-                    st.success("✅ Answer:")
+                    st.success("Answer:")
                     st.write(result["result"])
             except Exception as e:
                 st.error(f"Error: {e}")
@@ -90,15 +90,15 @@ def youtube_page():
 
 # Gemini Chatbot Page
 def chatbot_page():
-    st.header("🤖 Gemini API Chatbot")
-    prompt = st.text_input("💬 Ask anything:")
+    st.header("Gemini API Chatbot")
+    prompt = st.text_input(" Ask anything:")
 
-    if st.button("🚀 Get Answer"):
+    if st.button("Get Answer"):
         if prompt:
             try:
                 llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=GOOGLE_API_KEY)
                 response = llm.invoke([HumanMessage(content=prompt)])
-                st.success("✅ Answer:")
+                st.success("Answer:")
                 st.write(response.content)
             except Exception as e:
                 st.error(f"Error: {e}")
@@ -107,7 +107,7 @@ def chatbot_page():
 
 # PDF Chat Page
 def pdf_page():
-    st.header("📄 Chat with your PDF")
+    st.header(" Chat with your PDF")
     pdf_file = st.file_uploader("📎 Upload PDF", type="pdf")
 
     if pdf_file:
@@ -129,7 +129,7 @@ def pdf_page():
         if user_q:
             with st.spinner("Thinking..."):
                 response = qa.invoke({"query": user_q})
-                st.success("✅ Answer:")
+                st.success(" Answer:")
                 st.write(response["result"])
 
 
@@ -141,15 +141,15 @@ if st.session_state.page == "home":
     home()
 elif st.session_state.page == "chatbot":
     youtube_page()
-    if st.button("⬅️ Back to Home"):
+    if st.button(" Back to Home"):
         st.session_state.page = "home"
 elif st.session_state.page == "youtube":
     chatbot_page()
-    if st.button("⬅️ Back to Home"):
+    if st.button(" Back to Home"):
         st.session_state.page = "home"
 elif st.session_state.page == "pdf":
     pdf_page()
-    if st.button("⬅️ Back to Home"):
+    if st.button("Back to Home"):
         st.session_state.page = "home"
 
      
